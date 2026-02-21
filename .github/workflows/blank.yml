@@ -21,7 +21,8 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: "echo ${{ github.event.issue.body }} >> current.log  "
+        run: |
+          echo "${{ github.event.issue.body }}" >> current.log  
 
 
       - name: Commit changes

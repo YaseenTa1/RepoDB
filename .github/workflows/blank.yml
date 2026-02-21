@@ -21,6 +21,17 @@ jobs:
 
       # Runs a single command using the runners shell
       - name: Run a one-line script
-        run: "echo Issue body: ${{ github.event.issue.body }} "
+        run: "echo ${{ github.event.issue.body }} >> current.log  "
 
 
+      - name: Commit changes
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com" // this is default acc, you may change it if needed
+          git add .
+          git commit -m "adding message"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
